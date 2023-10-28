@@ -1,19 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?> <!--Указываем метаинформацию XML-файла - версию XML и кодировку-->
+<!--<project> - корневой тег в Maven. В атрибутах указываем ссылки, по которым описано пространство имен.
+    Именно в них хранится информация о тегах, их атрибутах и правилах валидации помника для версии, указанной ниже -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--Версия модели. У каждой версии свои схемы, ссылки на которые мы указали выше-->
     <modelVersion>4.0.0</modelVersion>
 
+<!--    Задаем информацию о нашем проекте. Это позволяет использовать данный проект в других мавен-проектах.
+        Например, подключать модули в многомодульных проектах. Конкретно здесь - не играет серьезной роли-->
     <groupId>com.walking</groupId>
     <artifactId>maven-sample</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+<!--    Параметры проекта:
+            - версия JDK, с которой должен быть совместим код;
+            - версия JDK, ожидаемая от платформы, на которой будет запускаться приложение;
+            - кодировка,с учетом которой нужно интерпретировать исходные файлы проекта. -->
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <!--Декларативное подключение зависимостей, требуемых проекту-->
     <dependencies>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -27,20 +37,17 @@
         </dependency>
     </dependencies>
 
+<!--    Добавление плагина и цели - инструментов,
+        которые позволят запустить скомпилированное приложение средствами Maven-->
     <build>
         <plugins>
             <plugin>
+<!--                Плагин-->
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <configuration>
+<!--                    Указание точки входа для цели-->
                     <mainClass>com.walking.maven.Main</mainClass>
                 </configuration>
             </plugin>
